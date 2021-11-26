@@ -3,6 +3,6 @@
    unset($_SESSION["username"]);
    unset($_SESSION["password"]);
 
-   echo 'Logged out. Please wait a few seconds.';
-   header('Refresh: 2; URL = login.php');
+   echo 'Logging out. Please wait a moment...';
+   header('Refresh: 1; URL = login.php');
 ?>

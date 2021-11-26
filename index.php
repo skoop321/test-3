@@ -1,17 +1,16 @@
 <?php
 $servername = "localhost";
-$username = "username";
+$username = "root";
 $password = "";
-$dbname = "scamazon";
 
 // Create connection
-$conn = new mysqli($servername, $username, $password, $scamazon);
+$conn = new mysqli($servername, $username, $password);
 
 // Check connection
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
-echo "Connected successfully";
+echo "Connected successfully. ";
 ?>
 
 <!DOCTYPE html>
@@ -47,16 +46,47 @@ echo "Connected successfully";
 
     <?php
         if(isset($_POST['pc1'])) {
-            echo "This is pc1 that is selected";
+          $sql = "INSERT INTO scamazon.cart (userid, name, price)
+          VALUES ('1', 'RGB360', '1800.00')";
+
+          if ($conn->query($sql) === TRUE) {
+          echo "Item added to cart.";
+          } else {
+          echo "Error: " . $sql . "<br>" . $conn->error;
+          }
         }
+
         if(isset($_POST['pc2'])) {
-            echo "This is pc2 that is selected";
+          $sql = "INSERT INTO scamazon.cart (userid, name, price)
+          VALUES ('1', 'RED220i', '2300.00')";
+
+          if ($conn->query($sql) === TRUE) {
+          echo "Item added to cart.";
+          } else {
+          echo "Error: " . $sql . "<br>" . $conn->error;
+          };
         }
+
         if(isset($_POST['pc3'])) {
-            echo "This is pc3 that is selected";
+          $sql = "INSERT INTO scamazon.cart (userid, name, price)
+          VALUES ('1', 'REDxA9', '3500.00')";
+
+          if ($conn->query($sql) === TRUE) {
+          echo "Item added to cart.";
+          } else {
+          echo "Error: " . $sql . "<br>" . $conn->error;
+          }
         }
+
         if(isset($_POST['pc4'])) {
-            echo "This is pc4 that is selected";
+          $sql = "INSERT INTO scamazon.cart (userid, name, price)
+          VALUES ('1', 'RGB720', '2400.00')";
+
+          if ($conn->query($sql) === TRUE) {
+          echo "Item added to cart.";
+          } else {
+          echo "Error: " . $sql . "<br>" . $conn->error;
+          }
         }
     ?>
 
@@ -160,70 +190,6 @@ echo "Connected successfully";
       </div>
     </div>
 
-    <div class="productcol">
-      <div class="row align-items-start">
-        <div class="col">
-          <img src="pc1.jpeg" class="productimg"></img>
-          <div class="productdesc">
-            <h4>Gaming Desktop RGB360</h4>
-            <h5>Specifications:</h5>
-            <ul>
-              <li>CPU: AMD Ryzen 5 3600x</li>
-              <li>GPU: nVidia GeForce RTX 3060TI</li>
-              <li>RAM: 32gb DDR4 3200mHz</li>
-              <li>Price: $1800</li>
-            </ul>
-          </div>
-          <button type="button" class="btn btn-warning" onclick="addCart(1800)">Add to Cart</button>
-        </div>
-
-        <div class="col">
-          <img src="pc4.png" class="productimg"></img>
-          <div class="productdesc">
-            <h4>Gaming Desktop RGB720</h4>
-            <h5>Specifications:</h5>
-            <ul>
-              <li>CPU: AMD Ryzen 5 5600x</li>
-              <li>GPU: AMD Radeon 6800x</li>
-              <li>RAM: 32gb DDR4 3200mHz</li>
-              <li>Price: $2400</li>
-            </ul>
-          </div>
-          <button type="button" class="btn btn-warning" onclick="addCart(2400)">Add to Cart</button>
-        </div>
-
-        <div class="col">
-          <img src="pc2.jpeg" class="productimg"></img>
-          <div class="productdesc">
-            <h4>Gaming Desktop RED220i</h4>
-            <h5>Specifications:</h5>
-            <ul>
-              <li>CPU: Intel i5 8375</li>
-              <li>GPU: nVidia GeForce RTX 3080</li>
-              <li>RAM: 32gb DDR4 3200mHz</li>
-              <li>Price: $2300</li>
-            </ul>
-          </div>
-          <button type="button" class="btn btn-warning" onclick="addCart(2300)">Add to Cart</button>
-        </div>
-
-        <div class="col">
-          <img src="pc3.png" class="productimg"></img>
-          <div class="productdesc">
-            <h4>Gaming Desktop REDxA9</h4>
-            <h5>Specifications:</h5>
-            <ul>
-              <li>CPU: AMD Ryzen 7 5900x</li>
-              <li>GPU: nVidia GeForce RTX 3090</li>
-              <li>RAM: 64gb DDR4 3200mHz</li>
-              <li>Price: $3500</li>
-            </ul>
-          </div>
-          <button type="button" class="btn btn-warning" onclick="addCart(3500)">Add to Cart</button>
-        </div>
-
-      </div>
-    </div>
 
     <footer class="my-5 pt-5 text-muted text-center text-small">
       <div class="jumbotron jumbotron-fluid bg-dark">

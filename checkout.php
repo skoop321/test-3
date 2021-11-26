@@ -1,17 +1,16 @@
 <?php
 $servername = "localhost";
-$username = "username";
+$username = "root";
 $password = "";
-$dbname = "scamazon";
 
 // Create connection
-$conn = new mysqli($servername, $username, $password, $scamazon);
+$conn = new mysqli($servername, $username, $password);
 
 // Check connection
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
-echo "Connected successfully";
+echo "Connected successfully. ";
 ?>
 
 <!DOCTYPE html>
@@ -44,6 +43,18 @@ echo "Connected successfully";
         });
       });
     </script>
+
+    <?php
+        if(isset($_POST['clearcart'])) {
+          $sql = "DELETE FROM scamazon.cart WHERE userid = 1";
+
+          if ($conn->query($sql) === TRUE) {
+          echo "All items removed from cart.";
+          } else {
+          echo "Error: " . $sql . "<br>" . $conn->error;
+          }
+        }
+    ?>
 
   </head>
 
@@ -102,6 +113,11 @@ echo "Connected successfully";
             <li class="list-group-item d-flex justify-content-between">
               <span>Total (BZD)</span>
               <strong>$20</strong>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <form method="post">
+                <input type="submit" class="btn btn-danger" name="clearcart" value="Clear Cart"/>
+              </form>
             </li>
           </ul>
 

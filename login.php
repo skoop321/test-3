@@ -5,12 +5,11 @@
 
 <?php
 $servername = "localhost";
-$username = "username";
+$username = "root";
 $password = "";
-$dbname = "scamazon";
 
 // Create connection
-$conn = new mysqli($servername, $username, $password, $scamazon);
+$conn = new mysqli($servername, $username, $password);
 
 // Check connection
 if ($conn->connect_error) {
@@ -86,10 +85,10 @@ echo "Connected successfully";
              ?>" method = "post">
              <h4 class = "form-signin-heading"><?php echo $msg; ?></h4>
              <input type = "text" class = "form-control"
-                name = "username" placeholder = "Username: username"
+                name = "username" placeholder = "Username: user"
                 required autofocus></br>
              <input type = "password" class = "form-control"
-                name = "password" placeholder = "Password: password" required>
+                name = "password" placeholder = "Password: pass" required>
              <button class = "btn btn-lg btn-primary btn-block mt-4" type = "submit"
                 name = "login">Login</button>
           </form>
