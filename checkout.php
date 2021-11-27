@@ -55,6 +55,16 @@ echo "Connected successfully. ";
           }
           header('Location:http://localhost/Scamazon/checkout.php');
         }
+        if(isset($_POST['checkout'])) {
+          $sql = "DELETE FROM scamazon.cart WHERE userid = 1";
+
+          if ($conn->query($sql) === TRUE) {
+          echo "Thank you for your purchase.";
+          } else {
+          echo "Error: " . $sql . "<br>" . $conn->error;
+          }
+          header('Location:http://localhost/Scamazon/checkout.php');
+        }
 
         $sql = "SELECT * FROM scamazon.cart";
         $minid_qry = "SELECT MIN(itemid) AS minid FROM scamazon.cart";
@@ -164,7 +174,7 @@ echo "Connected successfully. ";
         </div>
         <div class="col-md-8 order-md-1">
           <h4 class="mb-3">Billing address</h4>
-          <form class="needs-validation" novalidate="">
+          <form class="needs-validation" novalidate="" method="post">
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="firstName">First name</label>
@@ -306,7 +316,7 @@ echo "Connected successfully. ";
               </div>
             </div>
             <hr class="mb-4">
-            <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+              <input type="submit" class="btn btn-primary btn-lg btn-block" name="checkout" value="Continue to Checkout"/>
           </form>
         </div>
       </div>
