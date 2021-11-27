@@ -53,6 +53,7 @@ echo "Connected successfully. ";
           } else {
           echo "Error: " . $sql . "<br>" . $conn->error;
           }
+          header('Location:http://localhost/Scamazon/checkout.php');
         }
     ?>
 

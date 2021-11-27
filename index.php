@@ -54,6 +54,7 @@ echo "Connected successfully. ";
           } else {
           echo "Error: " . $sql . "<br>" . $conn->error;
           }
+          header('Location:http://localhost/Scamazon/index.php');
         }
 
         if(isset($_POST['pc2'])) {
@@ -64,7 +65,8 @@ echo "Connected successfully. ";
           echo "Item added to cart.";
           } else {
           echo "Error: " . $sql . "<br>" . $conn->error;
-          };
+          }
+          header('Location:http://localhost/Scamazon/index.php');
         }
 
         if(isset($_POST['pc3'])) {
@@ -76,6 +78,7 @@ echo "Connected successfully. ";
           } else {
           echo "Error: " . $sql . "<br>" . $conn->error;
           }
+          header('Location:http://localhost/Scamazon/index.php');
         }
 
         if(isset($_POST['pc4'])) {
@@ -87,6 +90,7 @@ echo "Connected successfully. ";
           } else {
           echo "Error: " . $sql . "<br>" . $conn->error;
           }
+          header('Location:http://localhost/Scamazon/index.php');
         }
     ?>
 
