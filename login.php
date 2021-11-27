@@ -16,6 +16,11 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 echo "Connected successfully";
+
+$count_qry = "SELECT COUNT(itemid) AS count FROM scamazon.cart";
+$count_exe = $conn->query($count_qry);
+$count_record = $count_exe->fetch_array();
+$count = $count_record['count'];
 ?>
 
 <!DOCTYPE html>
@@ -50,7 +55,7 @@ echo "Connected successfully";
            <a class="nav-link active" href="login.php">Account</a>
          </li>
          <li class="nav-item">
-           <a class="nav-link" href="checkout.php">Cart</a>
+           <a class="nav-link active" href="checkout.php">Cart (<?php echo $count; ?>)</a>
          </li>
        </ul>
      </div>

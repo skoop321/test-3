@@ -55,6 +55,27 @@ echo "Connected successfully. ";
           }
           header('Location:http://localhost/Scamazon/checkout.php');
         }
+
+        $sql = "SELECT * FROM scamazon.cart";
+        $minid_qry = "SELECT MIN(itemid) AS minid FROM scamazon.cart";
+        $sum_qry = "SELECT SUM(price) AS total FROM scamazon.cart";
+        $count_qry = "SELECT COUNT(itemid) AS count FROM scamazon.cart";
+
+        $sum_exe = $conn->query($sum_qry);
+        $sum_record = $sum_exe->fetch_array();
+        $sum = $sum_record['total'];
+
+        $pcid = mysqli_query($conn, $sql);
+
+        $minid_exe = $conn->query($minid_qry);
+        $minid_record = $minid_exe->fetch_array();
+        $minid = $minid_record['minid'];
+
+        $count_exe = $conn->query($count_qry);
+        $count_record = $count_exe->fetch_array();
+        $count = $count_record['count'];
+
+        $gst = ($sum/100) * 12.5;
     ?>
 
   </head>
@@ -74,7 +95,7 @@ echo "Connected successfully. ";
           <a class="nav-link" href="login.php">Account</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="checkout.php">Cart</a>
+          <a class="nav-link active" href="checkout.php">Cart (<?php echo $count; ?>)</a>
         </li>
       </ul>
     </div>
@@ -83,7 +104,9 @@ echo "Connected successfully. ";
         <div class="col-md-4 order-md-2 mb-4">
           <h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-muted">Your cart</span>
-            <span class="badge badge-secondary badge-pill">3</span>
+            <span class="badge badge-secondary badge-pill">
+              <?php echo $count; ?>
+            </span>
           </h4>
 
 
@@ -93,28 +116,42 @@ echo "Connected successfully. ";
             <li class="list-group-item d-flex justify-content-between lh-condensed">
               <div>
                 <h6 class="my-0">Product name</h6>
-                <small class="text-muted">Brief description</small>
               </div>
               <span class="text-muted">$12</span>
             </li>
+
             <li class="list-group-item d-flex justify-content-between lh-condensed">
               <div>
                 <h6 class="my-0">Second product</h6>
-                <small class="text-muted">Brief description</small>
               </div>
               <span class="text-muted">$8</span>
             </li>
-            <li class="list-group-item d-flex justify-content-between lh-condensed">
-              <div>
-                <h6 class="my-0">Third item</h6>
-                <small class="text-muted">Brief description</small>
-              </div>
-              <span class="text-muted">$5</span>
-            </li>
+
             <li class="list-group-item d-flex justify-content-between">
-              <span>Total (BZD)</span>
-              <strong>$20</strong>
+              <span>GST (12.5%)</span>
+              <strong>
+                <?php
+                /*if($pcid->num_rows > 0) {
+                  while($row = $pcid->fetch_assoc()) {
+                    echo $row["itemid"];
+                  }
+                } else {
+                  echo "$0.00";
+                }*/
+                echo "$" .$gst. ".00";
+                 ?>
+              </strong>
             </li>
+
+            <li class="list-group-item d-flex justify-content-between">
+              <span><strong>Total</strong></span>
+              <strong>
+                <?php
+                  echo "$" .($sum + $gst). ".00";
+                 ?>
+              </strong>
+            </li>
+
             <li class="list-group-item d-flex justify-content-between">
               <form method="post">
                 <input type="submit" class="btn btn-danger" name="clearcart" value="Clear Cart"/>
