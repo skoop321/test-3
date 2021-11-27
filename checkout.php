@@ -67,9 +67,12 @@ echo "Connected successfully. ";
         }
 
         $sql = "SELECT * FROM scamazon.cart";
+
         $minid_qry = "SELECT MIN(itemid) AS minid FROM scamazon.cart";
         $sum_qry = "SELECT SUM(price) AS total FROM scamazon.cart";
         $count_qry = "SELECT COUNT(itemid) AS count FROM scamazon.cart";
+        $minname_qry = "SELECT name AS name FROM scamazon.cart WHERE (SELECT MIN(itemid) AS minid FROM scamazon.cart)";
+        $minpr_qry = "SELECT price AS price FROM scamazon.cart WHERE (SELECT MIN(itemid) AS minid FROM scamazon.cart)";
 
         $sum_exe = $conn->query($sum_qry);
         $sum_record = $sum_exe->fetch_array();
@@ -80,6 +83,14 @@ echo "Connected successfully. ";
         $minid_exe = $conn->query($minid_qry);
         $minid_record = $minid_exe->fetch_array();
         $minid = $minid_record['minid'];
+
+        $minname_exe = $conn->query($minname_qry);
+        $minname_record = $minname_exe->fetch_array();
+        $minname = $minname_record['name'];
+
+        $minpr_exe = $conn->query($minpr_qry);
+        $minpr_record = $minpr_exe->fetch_array();
+        $minpr = $minpr_record['price'];
 
         $count_exe = $conn->query($count_qry);
         $count_record = $count_exe->fetch_array();
@@ -123,18 +134,29 @@ echo "Connected successfully. ";
 
 
           <ul class="list-group mb-3">
-            <li class="list-group-item d-flex justify-content-between lh-condensed">
-              <div>
-                <h6 class="my-0">Product name</h6>
-              </div>
-              <span class="text-muted">$12</span>
-            </li>
 
             <li class="list-group-item d-flex justify-content-between lh-condensed">
-              <div>
-                <h6 class="my-0">Second product</h6>
-              </div>
-              <span class="text-muted">$8</span>
+              <table class="table table-hover table-sm text-right">
+                  <?php
+                    echo "
+                    <tr>
+                      <th>Item</th>
+                      <th>Price</th>
+                    </tr>
+                    <tr>
+                      <td>" .$minname."</td>
+                      <td>$" .$minpr. "</td>
+                    </tr>
+                    ";
+                  ?>
+              </table>
+            </li>
+
+            <li class="list-group-item d-flex justify-content-between">
+              <span>Pre-Tax Total</span>
+                <?php
+                  echo "$" .number_format($sum, 2);
+                 ?>
             </li>
 
             <li class="list-group-item d-flex justify-content-between">
