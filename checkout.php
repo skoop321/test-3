@@ -148,7 +148,7 @@ echo "Connected successfully. ";
                 } else {
                   echo "$0.00";
                 }*/
-                echo "$" .$gst. ".00";
+                echo "$" .number_format($gst, 2);
                  ?>
               </strong>
             </li>
@@ -157,7 +157,8 @@ echo "Connected successfully. ";
               <span><strong>Total</strong></span>
               <strong>
                 <?php
-                  echo "$" .($sum + $gst). ".00";
+                  $sumgst = ($sum+$gst);
+                  echo "$" .number_format($sumgst, 2);
                  ?>
               </strong>
             </li>
